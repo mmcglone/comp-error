@@ -1,1 +1,5 @@
-module.exports = {};
+const Either = require('./Either');
+
+module.exports = {
+  Either,
+};
