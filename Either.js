@@ -10,8 +10,23 @@ class Either {
     }
   }
 
+  static of(val) {
+    return new Either(val);
+  }
+
   [hasError]() {
     return this[value] instanceof Error;
+  }
+
+  chain(f) {
+    if (this[hasError]()) {
+      return this;
+    }
+    return f(this[value]);
+  }
+
+  always(f) {
+    return f(this[value]);
   }
 
   map(f) {
@@ -24,15 +39,6 @@ class Either {
       return new Either(e);
     }
   }
-
-  get value() {
-    return this[value];
-  }
-  /* eslint-disable class-methods-use-this */
-  set value(val) {
-    throw new Error('Cannot change the value of an Either');
-  }
-  /* eslint-enable class-methods-use-this */
 
   catch(f) {
     if (this[hasError]()) {
