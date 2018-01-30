@@ -14,12 +14,12 @@ class Either {
     return new Either(val);
   }
 
-  [hasError]() {
+  get [hasError]() {
     return this[value] instanceof Error;
   }
 
   chain(f) {
-    if (this[hasError]()) {
+    if (this[hasError]) {
       return this;
     }
     return f(this[value]);
@@ -30,25 +30,11 @@ class Either {
   }
 
   map(f) {
-    if (this[hasError]()) {
-      return this;
-    }
-    try {
-      return new Either(f(this[value]));
-    } catch (e) {
-      return new Either(e);
-    }
+    return this[hasError] ? this : new Either(f(this[value]));
   }
 
   catch(f) {
-    if (this[hasError]()) {
-      try {
-        return new Either(f(this[value]));
-      } catch (e) {
-        return new Either(e);
-      }
-    }
-    return this;
+    return this[hasError] ? new Either(f(this[value])) : this;
   }
 }
 
