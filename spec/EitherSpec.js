@@ -56,19 +56,10 @@ describe('An Either', () => {
   /* map */
   describe('when its map method is called with a function f', () => {
     describe('when its value is a non-Error v', () => {
-      describe('when f does not throw', () => {
-        it('should return an Either whose value is f(v)', () => {
-          const result = either.map(value => value + 3);
-          expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toBe(4);
-        });
-      });
-      describe('when f throws an error e', () => {
-        it('should return an Either whose value is e', () => {
-          const result = either.map(() => JSON.parse('"'));
-          expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toEqual(jasmine.any(Error));
-        });
+      it('should return an Either whose value is f(v)', () => {
+        const result = either.map(value => value + 3);
+        expect(result).toEqual(jasmine.any(Either));
+        expect(result.always(identity)).toBe(4);
       });
     });
     describe('when its value is an Error e', () => {
@@ -92,19 +83,10 @@ describe('An Either', () => {
       });
     });
     describe('when its value is an Error e', () => {
-      describe('when f does not throw', () => {
-        it('should return an Either whose value is f(e)', () => {
-          const result = eitherWithError.catch(err => err.message);
-          expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toBe(error.message);
-        });
-      });
-      describe('when f throws an error e', () => {
-        it('should return an either whose value is e', () => {
-          const result = eitherWithError.catch(err => JSON.parse(err));
-          expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(err => err)).toEqual(jasmine.any(Error));
-        });
+      it('should return an Either whose value is f(e)', () => {
+        const result = eitherWithError.catch(err => err.message);
+        expect(result).toEqual(jasmine.any(Either));
+        expect(result.always(identity)).toBe(error.message);
       });
     });
   });
