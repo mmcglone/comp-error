@@ -4,7 +4,6 @@ const catchE = require('../catchE');
 const chain = require('../chain');
 const Either = require('../Either');
 const map = require('../map');
-const Maybe = require('../Maybe');
 
 describe('The main module', () => {
   it('should export an object', () => {
@@ -28,12 +27,6 @@ describe('The main module', () => {
     });
     it('map as its map method', () => {
       expect(main.map).toBe(map);
-    });
-    it('Maybe as its Maybe property', () => {
-      expect(main.Maybe).toBe(Maybe);
-    });
-    it('Maybe.of as its either method', () => {
-      expect(main.maybe).toBe(Maybe.of);
     });
   });
 });
