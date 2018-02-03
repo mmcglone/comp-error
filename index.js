@@ -1,12 +1,12 @@
 const always = require('./always');
-const catchE = require('./catchE');
+const catchR = require('./catchR');
 const chain = require('./chain');
 const Either = require('./Either');
 const map = require('./map');
 
 module.exports = {
   always,
-  catchE,
+  catchR,
   chain,
   Either,
   either: Either.of,
