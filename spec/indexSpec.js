@@ -1,6 +1,6 @@
 const main = require('../index');
 const always = require('../always');
-const catchE = require('../catchE');
+const catchR = require('../catchR');
 const chain = require('../chain');
 const Either = require('../Either');
 const map = require('../map');
@@ -13,8 +13,8 @@ describe('The main module', () => {
     it('always as its always method', () => {
       expect(main.always).toBe(always);
     });
-    it('catchE as its catchE method', () => {
-      expect(main.catchE).toBe(catchE);
+    it('catchE as its catchR method', () => {
+      expect(main.catchR).toBe(catchR);
     });
     it('chain as its chain method', () => {
       expect(main.chain).toBe(chain);
