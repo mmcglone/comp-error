@@ -15,14 +15,7 @@ class Either {
   }
 
   chain(f) {
-    if (this[hasError]) {
-      return this;
-    }
-    try {
-      return f(this[value]);
-    } catch (error) {
-      return error;
-    }
+    return this[hasError] ? this : f(this[value]);
   }
 
   always(f) {
