@@ -3,11 +3,7 @@ const hasError = Symbol('hasError');
 
 class Either {
   constructor(val) {
-    if (val instanceof Either) {
-      this[value] = val[value];
-    } else {
-      this[value] = val;
-    }
+    this[value] = (val instanceof Either) ? val[value] : val;
   }
 
   static of(val) {
@@ -22,7 +18,11 @@ class Either {
     if (this[hasError]) {
       return this;
     }
-    return f(this[value]);
+    try {
+      return f(this[value]);
+    } catch (error) {
+      return error;
+    }
   }
 
   always(f) {
@@ -30,11 +30,25 @@ class Either {
   }
 
   map(f) {
-    return this[hasError] ? this : new Either(f(this[value]));
+    if (this[hasError]) {
+      return this;
+    }
+    try {
+      return new Either(f(this[value]));
+    } catch (error) {
+      return new Either(error);
+    }
   }
 
   catch(f) {
-    return this[hasError] ? new Either(f(this[value])) : this;
+    if (!this[hasError]) {
+      return this;
+    }
+    try {
+      return new Either(f(this[value]));
+    } catch (error) {
+      return new Either(error);
+    }
   }
 }
 
