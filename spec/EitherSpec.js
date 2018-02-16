@@ -90,6 +90,36 @@ describe('An Either', () => {
       });
     });
   });
+
+  /* promise */
+  describe('when its toPromise method is called', () => {
+    describe('when its value is a non-Error v', () => {
+      it('should return a promise that resolves to v', () => {
+        const shouldHaveBeenCalled = jasmine.createSpy('shouldBeCalled');
+        either.toPromise()
+          .then((value) => {
+            shouldHaveBeenCalled();
+            expect(value).toBe(1);
+          })
+          .then(() => {
+            expect(shouldHaveBeenCalled).toHaveBeenCalled();
+          });
+      });
+    });
+    describe('when its value is an Error e', () => {
+      it('should return a Promise that rejects with e as its reason', () => {
+        const shouldHaveBeenCalled = jasmine.createSpy('shouldHaveBeenCalled');
+        eitherWithError.toPromise()
+          .catch((err) => {
+            shouldHaveBeenCalled();
+            expect(err).toBe(error);
+          })
+          .then(() => {
+            expect(shouldHaveBeenCalled).toHaveBeenCalled();
+          });
+      });
+    });
+  });
 });
 
 describe('The static method Either.of', () => {
