@@ -43,6 +43,11 @@ class Either {
       return new Either(error);
     }
   }
+
+  toPromise() {
+    const method = this[hasError] ? 'reject' : 'resolve';
+    return Promise[method](this[value]);
+  }
 }
 
 module.exports = Either;

@@ -4,6 +4,7 @@ const catchR = require('../catchR');
 const chain = require('../chain');
 const Either = require('../Either');
 const map = require('../map');
+const promise = require('../promise');
 
 describe('The main module', () => {
   it('should export an object', () => {
@@ -27,6 +28,9 @@ describe('The main module', () => {
     });
     it('map as its map method', () => {
       expect(main.map).toBe(map);
+    });
+    it('promise as its promise method', () => {
+      expect(main.promise).toBe(promise);
     });
   });
 });
