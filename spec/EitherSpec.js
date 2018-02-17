@@ -1,5 +1,4 @@
 const Either = require('../Either');
-const identity = require('lodash/fp/identity');
 
 describe('An Either', () => {
   const either = new Either(1);
@@ -7,30 +6,30 @@ describe('An Either', () => {
   const eitherWithError = new Either(error);
 
   /* existence and readability of value */
-  it('should wrap a value that can be read through its "always" method using an identify function', () => {
-    expect(either.always(identity)).toEqual(1);
-    expect(eitherWithError.always(identity)).toEqual(error);
+  it('should wrap a value that can be read through its "unwrap" method', () => {
+    expect(either.unwrap()).toEqual(1);
+    expect(eitherWithError.unwrap()).toEqual(error);
   });
 
   /* creation */
   describe('when created from a non-either', () => {
     it('should have that non-either as its value', () => {
-      expect(either.always(identity)).toBe(1);
+      expect(either.unwrap()).toBe(1);
     });
   });
   describe('when created from an Either', () => {
     it('should have the value of that either as its value', () => {
       const either2 = new Either(either);
-      expect(either2.always(identity)).toBe(1);
+      expect(either2.unwrap()).toBe(1);
     });
   });
 
-  /* always */
-  describe('when its "always" method is called with a function f', () => {
+  /* unwrap */
+  describe('when its "unwrap" method is called', () => {
     describe('regardless of whether its value v is an Error or a non-Error', () => {
-      it('should return f(v)', () => {
-        expect(either.always(value => value.toString())).toBe('1');
-        expect(eitherWithError.always(value => value.toString())).toBe('Error: Some kind of error occurred');
+      it('should return v', () => {
+        expect(either.unwrap()).toBe(1);
+        expect(eitherWithError.unwrap()).toEqual(Error('Some kind of error occurred'));
       });
     });
   });
@@ -47,7 +46,7 @@ describe('An Either', () => {
         it('should return an Either whose value is e', () => {
           const result = eitherWithError.chain(value => value + 3);
           expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toBe(error);
+          expect(result.unwrap()).toBe(error);
         });
       });
     });
@@ -60,14 +59,14 @@ describe('An Either', () => {
         it('should return an Either whose value is f(v)', () => {
           const result = either.map(value => value + 3);
           expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toBe(4);
+          expect(result.unwrap()).toBe(4);
         });
       });
       describe('when f(v) throws and error e', () => {
         it('should return an Either whose value is e', () => {
           const result = either.map(() => JSON.parse('[]]'));
           expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toEqual(jasmine.any(Error));
+          expect(result.unwrap()).toEqual(jasmine.any(Error));
         });
       });
     });
@@ -76,7 +75,7 @@ describe('An Either', () => {
         it('should return an Either whose value is e', () => {
           const result = eitherWithError.map(value => value + 3);
           expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toBe(error);
+          expect(result.unwrap()).toBe(error);
         });
       });
     });
@@ -88,7 +87,7 @@ describe('An Either', () => {
       it('should return an Either whose value is v', () => {
         const result = either.catch(err => err.message);
         expect(result).toEqual(jasmine.any(Either));
-        expect(result.always(identity)).toBe(1);
+        expect(result.unwrap()).toBe(1);
       });
     });
     describe('when its value is an Error e', () => {
@@ -96,14 +95,14 @@ describe('An Either', () => {
         it('should return an Either whose value is f(e)', () => {
           const result = eitherWithError.catch(err => err.message);
           expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toBe(error.message);
+          expect(result.unwrap()).toBe(error.message);
         });
       });
       describe('when f(e) throws an error e1', () => {
         it('should return an Either whose value is e1', () => {
           const result = eitherWithError.catch(() => JSON.parse('[]]'));
           expect(result).toEqual(jasmine.any(Either));
-          expect(result.always(identity)).toEqual(jasmine.any(Error));
+          expect(result.unwrap()).toEqual(jasmine.any(Error));
         });
       });
     });
@@ -146,7 +145,20 @@ describe('The static method Either.of', () => {
       const val = 123;
       const either = Either.of(val);
       expect(either).toEqual(jasmine.any(Either));
-      expect(either.always(identity)).toBe(val);
+      expect(either.unwrap()).toBe(val);
+    });
+  });
+});
+
+describe('The static method Either.lift', () => {
+  describe('when called with a function f and value v', () => {
+    it('should return an either whose value is e.map(f).unwrap(), where e is an either whose value is v', () => {
+      const v = 123;
+      const f = a => a + 1;
+      const e = new Either(v);
+      const either = Either.lift(f, v);
+      expect(either).toEqual(jasmine.any(Either));
+      expect(either.unwrap()).toEqual(e.map(f).unwrap());
     });
   });
 });

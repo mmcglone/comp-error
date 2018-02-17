@@ -18,8 +18,8 @@ class Either {
     return this[hasError] ? this : f(this[value]);
   }
 
-  always(f) {
-    return f(this[value]);
+  unwrap() {
+    return this[value];
   }
 
   map(f) {
@@ -31,6 +31,10 @@ class Either {
     } catch (error) {
       return new Either(error);
     }
+  }
+
+  static lift(f, v) {
+    return new Either(v).map(f);
   }
 
   catch(f) {
