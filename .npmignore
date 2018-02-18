@@ -1,8 +1,11 @@
-.idea
-.gitignore
+.babelrc
 .eslintignore
 .eslintrc.js
+.flowconfig
+.gitignore
+.idea
 .nyc_output
 .nycrc
+.travis.yml
 scripts
 spec

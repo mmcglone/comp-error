@@ -1,5 +1,5 @@
-const Either = require('../Either');
-const unwrap = require('../unwrap');
+const Either = require('../src/Either');
+const unwrap = require('../src/unwrap');
 
 describe('unwrap', () => {
   describe('when called with an unwrappable u', () => {

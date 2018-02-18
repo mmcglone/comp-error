@@ -1,5 +1,5 @@
-const Either = require('../Either');
-const promise = require('../promise');
+const Either = require('../src/Either');
+const promise = require('../src/promise');
 
 describe('spec', () => {
   describe('when called with an object o that has a toPromise method as its argument', () => {

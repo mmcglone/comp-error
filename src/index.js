@@ -1,3 +1,4 @@
+// @flow
 const catchR = require('./catchR');
 const chain = require('./chain');
 const Either = require('./Either');

@@ -1,5 +1,5 @@
-const Either = require('../Either');
-const lift = require('../lift');
+const Either = require('../src/Either');
+const lift = require('../src/lift');
 
 describe('lift', () => {
   describe('when called with a liftable type T, func f, and value v', () => {

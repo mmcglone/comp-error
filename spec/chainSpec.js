@@ -1,5 +1,5 @@
-const Either = require('../Either');
-const chain = require('../chain');
+const Either = require('../src/Either');
+const chain = require('../src/chain');
 
 describe('chain', () => {
   describe('when called with a function f and chainable a', () => {

@@ -1,11 +1,11 @@
-const main = require('../index');
-const catchR = require('../catchR');
-const chain = require('../chain');
-const Either = require('../Either');
-const lift = require('../lift');
-const map = require('../map');
-const promise = require('../promise');
-const unwrap = require('../unwrap');
+const main = require('../src/index');
+const catchR = require('../src/catchR');
+const chain = require('../src/chain');
+const Either = require('../src/Either');
+const lift = require('../src/lift');
+const map = require('../src/map');
+const promise = require('../src/promise');
+const unwrap = require('../src/unwrap');
 
 describe('The main module', () => {
   it('should export an object', () => {
