@@ -42,6 +42,5 @@
     "jasmine-spec-reporter": "^4.2.1",
     "nyc": "^11.4.1",
     "watch": "^1.0.2"
-  },
-  "version": "0.1.1-alpha-2"
+  }
 }
