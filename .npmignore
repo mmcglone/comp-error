@@ -1,6 +1,7 @@
 .babelrc
 .eslintignore
 .eslintrc.js
+.flowconfig
 .gitignore
 .idea
 .nyc_output
@@ -8,4 +9,3 @@
 .travis.yml
 scripts
 spec
-src

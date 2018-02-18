@@ -1,15 +1,15 @@
 // @flow
 
-type promisfiable = {
+type hasToPromise = {
   toPromise: () => Promise<any>
 };
 
-const promise = (obj: promisfiable): Promise<any> => obj.toPromise();
+const promise = (obj: hasToPromise): Promise<any> => obj.toPromise();
 
 module.exports = promise;
 
 const obj = {
-  toPromise: () => promise.resolve(),
+  toPromise: () => Promise.resolve(),
 };
 
 promise(obj);

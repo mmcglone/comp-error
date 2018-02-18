@@ -4,6 +4,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src/ -d lib/",
+    "prepublishOnly": "npm run build",
     "lint": "eslint --ext .js ./",
     "flow": "flow",
     "test": "jasmine --config=spec/support/jasmine.json",
@@ -28,6 +29,7 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-preset-flow": "^6.23.0",
+    "babel-register": "^6.26.0",
     "coveralls": "^3.0.0",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -40,5 +42,6 @@
     "jasmine-spec-reporter": "^4.2.1",
     "nyc": "^11.4.1",
     "watch": "^1.0.2"
-  }
+  },
+  "version": "0.1.1-alpha-2"
 }
