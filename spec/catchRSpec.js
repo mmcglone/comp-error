@@ -1,5 +1,5 @@
-const Either = require('../Either');
-const catchR = require('../catchR');
+const Either = require('../src/Either');
+const catchR = require('../src/catchR');
 
 describe('catchR', () => {
   describe('when called with a function f and catchable c', () => {

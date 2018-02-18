@@ -1,5 +1,5 @@
-const Either = require('../Either');
-const map = require('../map');
+const Either = require('../src/Either');
+const map = require('../src/map');
 
 describe('map', () => {
   describe('when called with a function f and mapable m', () => {

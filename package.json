@@ -1,9 +1,11 @@
 {
   "name": "comp-error",
   "description": "A Javascript library to help with error handling in functional composition",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "babel src/ -d lib/",
     "lint": "eslint --ext .js ./",
+    "flow": "flow",
     "test": "jasmine --config=spec/support/jasmine.json",
     "coverage": "nyc npm run -s test",
     "report-coverage": "cat ./spec/coverage/lcov.info | coveralls",
@@ -23,12 +25,17 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-preset-flow": "^6.23.0",
     "coveralls": "^3.0.0",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-flowtype": "^2.44.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "flow-bin": "^0.66.0",
     "jasmine": "^2.9.0",
     "jasmine-spec-reporter": "^4.2.1",
     "nyc": "^11.4.1",

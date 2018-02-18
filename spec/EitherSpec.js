@@ -1,4 +1,4 @@
-const Either = require('../Either');
+const Either = require('../src/Either');
 
 describe('An Either', () => {
   const either = new Either(1);
