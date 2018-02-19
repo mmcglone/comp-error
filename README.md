@@ -89,3 +89,46 @@ main(4); // -> Error: Book with id 4 is missing an author
 main(5); // -> Error: There is no book with id 5
 
 ```
+### Class: Either
+A class wrapping the result of a calculation, either a value or an Error.
+#### Constructor
+new Either(value)
+
+
+| Param  | Type                | Description     |
+| ------ | ------------------- | ------------    |
+| value  | <code>any</code>    | a value to wrap |
+
+#### Methods
+
+##### catch(func)
+Applies a function to the Error wrapped by an Either and then returns a
+new Either wrapping the result, if the original Either wraps an Error.
+Otherwise, the method simply returns the original Either.
+
+| Param  | Type                 | Description            |
+| ------ | -------------------  | ---------------------- |
+| func  | <code>function</code> |  The function to apply |
+
+##### map(func)
+Applies a function to the value wrapped by an Either and then returns a
+new Either wrapping the result, unless the original Either wraps an Error.
+When the original Either wraps an error, the method simply returns the original
+Either.
+
+| Param  | Type                 | Description            |
+| ------ | -------------------  | ---------------------- |
+| func  | <code>function</code> |  The function to apply |
+
+##### of(value)
+Returns a new instance of Either
+
+**Static**
+
+| Param  | Type                | Description     |
+| ------ | ------------------- | ------------    |
+| value  | <code>any</code>    | a value to wrap |
+
+##### unwrap()
+Returns the value wrapped by an Either, regardless of whether it is an
+Error or a non-Error.
